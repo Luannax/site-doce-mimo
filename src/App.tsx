@@ -111,6 +111,7 @@ interface ProductCardProps {
 
 function ProductCard({ product }: ProductCardProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [quantity, setQuantity] = useState(1);
 
   const handleNextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % product.images.length);
@@ -120,10 +121,19 @@ function ProductCard({ product }: ProductCardProps) {
     setCurrentImageIndex((prev) => (prev - 1 + product.images.length) % product.images.length);
   };
 
+  const handleIncrement = () => {
+    setQuantity(prev => prev + 1);
+  };
+
+  const handleDecrement = () => {
+    setQuantity(prev => prev > 1 ? prev - 1 : 1);
+  };
+
   const handleWhatsApp = () => {
     const deliveryFee = 5.00;
-    const totalWithDelivery = product.price + deliveryFee;
-    const message = `Olá! Gostaria de encomendar: *${product.name}*\n\nValor do produto: R$ ${product.price.toFixed(2)}\nTaxa de entrega: R$ ${deliveryFee.toFixed(2)}\n*Total: R$ ${totalWithDelivery.toFixed(2)}*\n\nPoderia me passar mais informações?`;
+    const productTotal = product.price * quantity;
+    const totalWithDelivery = productTotal + deliveryFee;
+    const message = `Olá! Gostaria de encomendar:\n\n*${product.name}*\nQuantidade: ${quantity}x\nValor unitário: R$ ${product.price.toFixed(2)}\nSubtotal: R$ ${productTotal.toFixed(2)}\nTaxa de entrega: R$ ${deliveryFee.toFixed(2)}\n\n*Total: R$ ${totalWithDelivery.toFixed(2)}*\n\nPoderia me passar mais informações?`;
     window.open(`https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
   };
 
@@ -167,6 +177,39 @@ function ProductCard({ product }: ProductCardProps) {
             <span className="delivery-fee">R$ 5,00</span>
           </div>
         </div>
+        
+        {/* Seletor de Quantidade */}
+        <div className="quantity-section">
+          <label className="quantity-label">Quantidade:</label>
+          <div className="quantity-selector-inline">
+            <button className="quantity-btn-inline" onClick={handleDecrement}>-</button>
+            <input 
+              type="number" 
+              className="quantity-input-inline" 
+              value={quantity} 
+              onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
+              min="1"
+            />
+            <button className="quantity-btn-inline" onClick={handleIncrement}>+</button>
+          </div>
+        </div>
+
+        {/* Resumo do Pedido */}
+        <div className="order-summary">
+          <div className="summary-row">
+            <span>Subtotal ({quantity}x):</span>
+            <span className="summary-value">R$ {(product.price * quantity).toFixed(2)}</span>
+          </div>
+          <div className="summary-row">
+            <span><i className="fas fa-truck"></i> Entrega:</span>
+            <span className="summary-value">R$ 5,00</span>
+          </div>
+          <div className="summary-row summary-total">
+            <span>Total:</span>
+            <span className="summary-total-value">R$ {(product.price * quantity + 5).toFixed(2)}</span>
+          </div>
+        </div>
+
         <div className="product-footer">
           <button className="whatsapp-button" onClick={handleWhatsApp}>
             <i className="fab fa-whatsapp"></i> Comprar

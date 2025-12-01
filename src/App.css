@@ -523,6 +523,124 @@ html {
     color: #6D4C41;
 }
 
+/* Seletor de Quantidade Inline */
+.quantity-section {
+    margin: 1.5rem 0;
+}
+
+.quantity-label {
+    display: block;
+    color: #6D4C41;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+}
+
+.quantity-selector-inline {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    justify-content: center;
+}
+
+.quantity-btn-inline {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #E8B4B8;
+    background: white;
+    color: #E8B4B8;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.quantity-btn-inline:hover {
+    background: #E8B4B8;
+    color: white;
+    transform: scale(1.1);
+}
+
+.quantity-btn-inline:active {
+    transform: scale(0.95);
+}
+
+.quantity-input-inline {
+    width: 70px;
+    height: 40px;
+    border: 2px solid #E8B4B8;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #6D4C41;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.quantity-input-inline:focus {
+    border-color: #D49AA0;
+    box-shadow: 0 0 0 3px rgba(232, 180, 184, 0.2);
+}
+
+.quantity-input-inline::-webkit-inner-spin-button,
+.quantity-input-inline::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Resumo do Pedido */
+.order-summary {
+    background: linear-gradient(135deg, #FFF5F7 0%, #FFE8EC 100%);
+    border-radius: 12px;
+    padding: 1.2rem;
+    margin-bottom: 1.5rem;
+    border: 2px solid #E8B4B8;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.7rem;
+    color: #6D4C41;
+    font-size: 0.95rem;
+}
+
+.summary-row:last-child {
+    margin-bottom: 0;
+}
+
+.summary-row i {
+    margin-right: 0.3rem;
+    color: #E8B4B8;
+    font-size: 0.9rem;
+}
+
+.summary-value {
+    font-weight: 600;
+    color: #6D4C41;
+}
+
+.summary-total {
+    margin-top: 0.7rem;
+    padding-top: 0.7rem;
+    border-top: 2px solid rgba(232, 180, 184, 0.4);
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.summary-total-value {
+    color: #E8B4B8;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
 .product-footer {
     display: flex;
     justify-content: center;
@@ -931,5 +1049,268 @@ html {
 
     .about-features {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Modal de Quantidade */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 1rem;
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    max-width: 450px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #999;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+    background: #f0f0f0;
+    color: #333;
+    transform: rotate(90deg);
+}
+
+.modal-content h3 {
+    font-family: 'Pacifico', cursive;
+    color: #6D4C41;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.modal-product-info {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.modal-product-image {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.modal-product-info h4 {
+    color: #6D4C41;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.modal-unit-price {
+    color: #E8B4B8;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.quantity-btn {
+    width: 45px;
+    height: 45px;
+    border: 2px solid #E8B4B8;
+    background: white;
+    color: #E8B4B8;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.quantity-btn:hover {
+    background: #E8B4B8;
+    color: white;
+    transform: scale(1.1);
+}
+
+.quantity-btn:active {
+    transform: scale(0.95);
+}
+
+.quantity-input {
+    width: 80px;
+    height: 45px;
+    border: 2px solid #E8B4B8;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #6D4C41;
+    outline: none;
+}
+
+.quantity-input::-webkit-inner-spin-button,
+.quantity-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.modal-pricing {
+    background: linear-gradient(135deg, #FFF5F7 0%, #FFE8EC 100%);
+    padding: 1.5rem;
+    border-radius: 15px;
+    margin-bottom: 1.5rem;
+}
+
+.modal-price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    color: #6D4C41;
+    font-size: 1rem;
+}
+
+.modal-price-row:last-child {
+    margin-bottom: 0;
+}
+
+.modal-price-row i {
+    margin-right: 0.3rem;
+    color: #E8B4B8;
+}
+
+.modal-price {
+    font-weight: 600;
+    color: #6D4C41;
+}
+
+.modal-total {
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 2px solid rgba(232, 180, 184, 0.3);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.modal-price-total {
+    color: #E8B4B8;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.modal-whatsapp-button {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.modal-whatsapp-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}
+
+.modal-whatsapp-button:active {
+    transform: translateY(0);
+}
+
+.modal-whatsapp-button i {
+    font-size: 1.3rem;
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    .modal-content h3 {
+        font-size: 1.5rem;
+    }
+
+    .modal-product-image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .quantity-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.3rem;
+    }
+
+    .quantity-input {
+        width: 70px;
+        height: 40px;
+        font-size: 1.1rem;
     }
 }
